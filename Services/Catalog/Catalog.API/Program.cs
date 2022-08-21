@@ -1,15 +1,15 @@
-using Catalog.Persistence;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var services = builder.Services;
 services.AddControllers();
+services.AddApiVersioning();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 services.AddDbContext<CatalogContext>(x =>
     x.UseNpgsql(builder.Configuration["ConnectionString:PostgresConnection"]));
+services.AddAutoMapper(Assembly.GetAssembly(typeof(MapperConfiguration)));
+Injector.InjectServices(services);
 
 var app = builder.Build();
 

@@ -1,10 +1,10 @@
 ﻿namespace Catalog.Persistence.Configuration;
 
-public class CatalogEntityConfiguration : IEntityTypeConfiguration<CatalogEntity>
+public class CatalogEntityConfiguration : IEntityTypeConfiguration<CategoryEntity>
 {
-    public void Configure(EntityTypeBuilder<CatalogEntity> builder)
+    public void Configure(EntityTypeBuilder<CategoryEntity> builder)
     {
-        builder.ToTable("Catalogs");
+        builder.ToTable("Category");
 
         builder.Property(x => x.Title)
             .IsRequired()

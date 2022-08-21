@@ -1,6 +1,6 @@
 ﻿namespace Catalog.Domain.Entities;
 
-public class CatalogEntity : IBaseEntity
+public class CategoryEntity : IBaseEntity
 {
     [Key]
     public Guid Id { get; set; }

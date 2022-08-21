@@ -1,14 +1,14 @@
-﻿using Catalog.Domain.Entities.Base;
-
-namespace Catalog.BusinessLogic.Services.Base;
+﻿namespace Catalog.BusinessLogic.Services.Base;
 
 public class BaseService
 {
     private readonly CatalogContext _context;
+    private readonly IDistributedCache _cache;
 
-    protected BaseService(CatalogContext context)
+    protected BaseService(CatalogContext context, IDistributedCache cache)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+        _cache = cache  ?? throw new ArgumentNullException(nameof(cache));
     }
 
     protected async Task<int> SaveAsync(IBaseEntity entity)

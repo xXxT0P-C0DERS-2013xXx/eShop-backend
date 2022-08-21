@@ -4,11 +4,13 @@ public class CategoryService : BaseService, ICategoryService
 {
     private readonly CatalogContext _context;
     private readonly IMapper _mapper;
+    private readonly IDistributedCache _cache;
 
-    public CategoryService(CatalogContext context, IMapper mapper) : base(context)
+    public CategoryService(CatalogContext context, IMapper mapper, IDistributedCache cache) : base(context, cache)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _cache = cache  ?? throw new ArgumentNullException(nameof(cache));
     }
 
     public async Task AddCategory(CategoryModel model)

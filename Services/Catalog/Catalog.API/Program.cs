@@ -9,6 +9,15 @@ services.AddSwaggerGen();
 services.AddDbContext<CatalogContext>(x =>
     x.UseNpgsql(builder.Configuration["ConnectionString:PostgresConnection"]));
 services.AddAutoMapper(Assembly.GetAssembly(typeof(MapperConfiguration)));
+services.AddStackExchangeRedisCache(options =>
+{
+    options.ConfigurationOptions = new ConfigurationOptions
+    {
+        AbortOnConnectFail = false,
+        EndPoints = new EndPointCollection { builder.Configuration["ConnectionString:RedisConnection"] }
+    };
+    options.InstanceName = "Catalog";
+});
 Injector.InjectServices(services);
 
 var app = builder.Build();

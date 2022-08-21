@@ -7,4 +7,5 @@ global using Catalog.BusinessLogic.Models;
 global using Catalog.Persistence;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
+global using StackExchange.Redis;
 global using MapperConfiguration = Catalog.BusinessLogic.Configuration.MapperConfiguration;

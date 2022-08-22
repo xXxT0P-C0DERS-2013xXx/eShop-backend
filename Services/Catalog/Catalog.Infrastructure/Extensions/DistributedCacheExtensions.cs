@@ -11,7 +11,7 @@ public static class DistributedCacheExtensions
     {
         var options = new DistributedCacheEntryOptions
         {
-            AbsoluteExpirationRelativeToNow = absoluteExpireTime ?? TimeSpan.FromMinutes(15),
+            AbsoluteExpirationRelativeToNow = absoluteExpireTime ?? TimeSpan.FromDays(1),
             SlidingExpiration = unusedExpireTime
         };
 

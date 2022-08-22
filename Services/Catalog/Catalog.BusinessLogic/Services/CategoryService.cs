@@ -16,30 +16,61 @@ public class CategoryService : BaseService, ICategoryService
     public async Task AddCategory(CategoryModel model)
     {
         var category = _mapper.Map<CategoryModel, CategoryEntity>(model);
-        await SaveAsync(category);
+        await SaveAsync(category, CacheConstants.Categories);
     }
 
-    public async Task<CategoryEntity?> GetCategoryById(Guid id)
+    public async Task<CategoryModel?> GetCategoryById(Guid id)
     {
-        return await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+        var category = await GetCategoryEntityById(id);
+        if (category == null)
+            return null;
+
+        return _mapper.Map<CategoryEntity, CategoryModel>(category);
+    }
+
+    public async Task<List<CategoryModel>> GetAllCategories()
+    {
+        var categories = await GetCategoriesEntity();
+        return _mapper.Map<List<CategoryEntity>, List<CategoryModel>>(categories);
     }
     
     public async Task UpdateCategoryById(CategoryModel model, Guid id)
     {
-        var category = _context.Categories.FirstOrDefault(x => x.Id == id);
+        var category = await GetCategoryEntityById(id);
         if (category == null)
             return;
+
+        var newCategory = _mapper.Map<CategoryModel, CategoryEntity>(model);
         
-        await UpdateAsync(category);
+        await UpdateAsync(newCategory, CacheConstants.Categories);
     }
 
     public async Task DeleteCategoryById(Guid id)
     {
-        await DeleteAsync(_context.Categories.FirstOrDefault(x => x.Id == id));
+        var category = await GetCategoryEntityById(id);
+        if (category == null)
+            return;
+        
+        await DeleteAsync(category, CacheConstants.Categories);
     }
 
-    public async Task<List<CategoryEntity>> GetAllCategories()
+    private async Task<CategoryEntity?> GetCategoryEntityById(Guid id)
     {
-        return await _context.Categories.ToListAsync();
+        var categories = await GetCategoriesEntity();
+        if (categories.Count < 0)
+            return null;
+
+        return categories.FirstOrDefault(x => x.Id == id);
+    }
+
+    private async Task<List<CategoryEntity>> GetCategoriesEntity()
+    {
+        var categories = await DistributedCacheExtensions.GetRecordAsync<List<CategoryEntity>>(_cache, CacheConstants.Categories);
+        if (categories != null && categories.Count != 0)
+            return categories;
+
+        categories = await _context.Categories.ToListAsync();
+        await DistributedCacheExtensions.SetRecordAsync(_cache, CacheConstants.Categories, categories);
+        return categories;
     }
 }

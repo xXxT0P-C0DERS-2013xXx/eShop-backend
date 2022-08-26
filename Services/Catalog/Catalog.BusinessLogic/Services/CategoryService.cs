@@ -36,7 +36,7 @@ public class CategoryService : BaseService, ICategoryService
 
     public async Task<BaseResponse> GetAllCategories()
     {
-        var categories = await GetCategoriesEntity();
+        var categories = (await GetCategoriesEntity()).OrderBy(x => x.OrderNumber).ToList();
         return _responseFactory.SuccessResponse(_mapper.Map<List<CategoryEntity>, List<CategoryModel>>(categories));
     }
     
@@ -65,7 +65,6 @@ public class CategoryService : BaseService, ICategoryService
         var result = await DeleteAsync(category, CacheConstants.Categories);
         if (result <= 0)
             return _responseFactory.ConflictResponse(String.Format(ErrorsConstants.SaveError, nameof(CategoryEntity), nameof(DeleteCategoryById)), id);
-        
         
         return _responseFactory.SuccessResponse(result);
     }

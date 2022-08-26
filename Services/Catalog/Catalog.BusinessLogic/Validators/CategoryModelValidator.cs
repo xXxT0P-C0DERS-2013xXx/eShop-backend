@@ -2,10 +2,16 @@
 
 public class CategoryModelValidator : AbstractValidator<CategoryModel>
 {
+    private const int TitleMaxLength = 100;
     public CategoryModelValidator()
     {
         RuleFor(x => x.Title)
             .NotEmpty()
-            .WithMessage(x => string.Format(ValidatorConstants.ShouldBeNotEmpty, x.Title));
+            .MaximumLength(100)
+            .WithMessage(x => string.Format(
+                ValidatorConstants.ConditionTwoAnd,
+                String.Format(ValidatorConstants.ShouldBeNotEmpty, x.Title), 
+                String.Format(ValidatorConstants.MaxLength, TitleMaxLength)
+            ));
     }
 }

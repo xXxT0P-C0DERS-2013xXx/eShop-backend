@@ -3,6 +3,7 @@
 public class CatalogContext : DbContext
 {
     public DbSet<CategoryEntity> Categories { get; set; }
+    public DbSet<ItemEntity> Items { get; set; }
 
     public CatalogContext(DbContextOptions options) : base(options)
     {

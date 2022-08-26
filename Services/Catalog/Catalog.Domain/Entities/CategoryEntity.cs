@@ -8,4 +8,6 @@ public class CategoryEntity : IBaseEntity
     public int? OrderNumber { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
+
+    public List<ItemEntity> Items { get; set; }
 }

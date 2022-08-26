@@ -1,6 +1,9 @@
 ﻿// Global using directives
 
+global using System.Net;
 global using System.Reflection;
+global using System.Text.Json;
+global using Catalog.API.Middlewares;
 global using Catalog.Application.Common.Response.CustomResponses;
 global using Catalog.BusinessLogic.Configuration;
 global using Catalog.BusinessLogic.Contracts.Services;

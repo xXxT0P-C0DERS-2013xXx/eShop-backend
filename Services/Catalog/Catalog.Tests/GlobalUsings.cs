@@ -11,3 +11,5 @@ global using Microsoft.Extensions.Caching.Distributed;
 global using Microsoft.Extensions.Caching.Memory;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Options;
+global using Catalog.Application.Common.Response.Contracts;
+global using Catalog.Application.Common.Response;

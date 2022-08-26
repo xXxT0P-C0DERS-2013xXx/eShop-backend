@@ -1,10 +1,10 @@
 ﻿namespace Catalog.BusinessLogic.Contracts.Services;
 
 public interface ICategoryService
-{  
-    Task AddCategory(CategoryModel model);
-    Task<CategoryModel?> GetCategoryById(Guid id);
-    Task UpdateCategoryById(CategoryModel model, Guid id);
-    Task DeleteCategoryById(Guid id);
-    Task<List<CategoryModel>> GetAllCategories();
+{
+    Task<BaseResponse> AddCategory(CategoryModel model);
+    Task<BaseResponse> GetCategoryById(Guid id);
+    Task<BaseResponse> UpdateCategoryById(CategoryModel model, Guid id);
+    Task<BaseResponse> DeleteCategoryById(Guid id);
+    Task<BaseResponse> GetAllCategories();
 }

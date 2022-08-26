@@ -15,8 +15,7 @@ public class CategoryController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddCategory(CategoryModel model)
     {
-        await _categoryService.AddCategory(model);
-        return Ok();
+        return Ok(await _categoryService.AddCategory(model));
     }
     
     [HttpGet]
@@ -36,14 +35,12 @@ public class CategoryController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> UpdateCategoryById(CategoryModel model, Guid id)
     {
-        await _categoryService.UpdateCategoryById(model, id);
-        return Ok();
+        return Ok(await _categoryService.UpdateCategoryById(model, id));
     }
     
     [HttpDelete]
     public async Task<IActionResult> DeleteCategoryById(Guid id)
     {
-        await _categoryService.DeleteCategoryById(id);
-        return Ok();
+        return Ok(await _categoryService.DeleteCategoryById(id));
     }
 }

@@ -6,7 +6,8 @@ public class CategoryServiceTests
     private readonly IMapper _mapper;
     private readonly IDistributedCache _cache;
     private readonly ICategoryService _service;
-
+    private readonly IResponseFactory _responseFactory;
+    
     public CategoryServiceTests()
     {
         var serviceCollection = new ServiceCollection();
@@ -16,8 +17,9 @@ public class CategoryServiceTests
         var serviceProvider = serviceCollection.BuildServiceProvider();
         _context = serviceProvider.GetRequiredService<CatalogContext>();
         _mapper = serviceProvider.GetRequiredService<IMapper>();
+        _responseFactory = new ResponseFactory();
         _cache = new MemoryDistributedCache(Options.Create(new MemoryDistributedCacheOptions()));
-        _service = new CategoryService(_context, _mapper, _cache);
+        _service = new CategoryService(_context, _mapper, _cache, _responseFactory);
     }
 
     [Fact]
@@ -60,10 +62,10 @@ public class CategoryServiceTests
         await _context.SaveChangesAsync();
         
         // Act
-        var postsCountAfterOperation = await _service.GetAllCategories();
+        var response = await _service.GetAllCategories();
 
         // Assert
-        Assert.Equal(categoryModels.Count, postsCountAfterOperation.Count);
+        Assert.Equal(categoryModels.Count, (((response.Data) as List<CategoryModel>)!).Count);
     }
     
     [Fact]
@@ -80,10 +82,10 @@ public class CategoryServiceTests
 
         // Act
         var category = await _context.Categories.Where(x => x.Title == "fake").FirstOrDefaultAsync();
-        var result = await _service.GetCategoryById(category.Id);
+        var result = await _service.GetCategoryById(category!.Id);
 
         // Assert
-        Assert.Equal(result.Title, categoryEntity.Title);
+        Assert.Equal((result.Data as CategoryModel)!.Title, categoryEntity.Title);
     }
 
     [Fact]
@@ -100,7 +102,8 @@ public class CategoryServiceTests
 
         // Act
         var category = await _context.Categories.Where(x => x.Title == "fake").FirstOrDefaultAsync();
-        await _service.DeleteCategoryById(category.Id);
+        if (category != null) 
+            await _service.DeleteCategoryById(category.Id);
 
         // Assert
         Assert.Equal(0, _context.Categories.Count());
@@ -120,16 +123,17 @@ public class CategoryServiceTests
 
         // Act
         var category = await _context.Categories.Where(x => x.Title == "fake").FirstOrDefaultAsync();
-        
-        var model = new CategoryModel()
+
+        var model = new CategoryModel
         {
             Title = "newFakeTitle"
         };
-        await _service.UpdateCategoryById(model, category.Id);
         
-        category = await _context.Categories.Where(x => x.Title == "newFakeTitle").FirstOrDefaultAsync();
+        await _service.UpdateCategoryById(model, category.Id);
+        category = await _context.Categories.Where(x => x.Title == "newFakeTitle" && x.Id == category.Id).FirstOrDefaultAsync();
 
         // Assert
-        Assert.Equal(category.Title, model.Title);
+        Assert.Equal(category?.Title, model.Title);
+        Assert.Single(_context.Categories.ToList());
     }
 }

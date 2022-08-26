@@ -1,6 +1,7 @@
 ﻿// Global using directives
 
 global using System.Reflection;
+global using Catalog.Application.Common.Response.CustomResponses;
 global using Catalog.BusinessLogic.Configuration;
 global using Catalog.BusinessLogic.Contracts.Services;
 global using Catalog.BusinessLogic.Models;

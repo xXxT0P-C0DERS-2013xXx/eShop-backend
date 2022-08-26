@@ -1,6 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 var services = builder.Services;
 services.AddControllers();
 services.AddApiVersioning();
@@ -18,11 +17,12 @@ services.AddStackExchangeRedisCache(options =>
     };
     options.InstanceName = "Catalog";
 });
+services.AddFluentValidationAutoValidation();
+services.AddScoped<IValidator<CategoryModel>, CategoryModelValidator>();
 Injector.InjectServices(services);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -33,7 +33,6 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

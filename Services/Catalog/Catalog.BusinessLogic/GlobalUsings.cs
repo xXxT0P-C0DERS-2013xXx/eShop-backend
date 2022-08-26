@@ -12,5 +12,8 @@ global using DistributedCacheExtensions = Catalog.Application.Extensions.Distrib
 global using Catalog.Application.Common.Response.Contracts;
 global using Catalog.Application.Common.Response.CustomResponses.Base;
 global using Catalog.Application.Constants;
+global using Catalog.BusinessLogic.Validators;
 global using Catalog.Domain.Entities.Base;
+global using FluentValidation;
+global using FluentValidation.Attributes;
 global using Microsoft.Extensions.DependencyInjection;

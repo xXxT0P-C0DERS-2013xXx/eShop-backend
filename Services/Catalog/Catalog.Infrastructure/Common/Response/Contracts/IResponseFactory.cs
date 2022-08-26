@@ -1,6 +1,4 @@
-﻿using Catalog.Application.Common.Response.CustomResponses;
-
-namespace Catalog.Application.Common.Response.Contracts;
+﻿namespace Catalog.Application.Common.Response.Contracts;
 
 public interface IResponseFactory
 {

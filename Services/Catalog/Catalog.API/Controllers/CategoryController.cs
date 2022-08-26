@@ -15,6 +15,7 @@ public class CategoryController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(SuccessResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ConflictResponse), StatusCodes.Status409Conflict)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddCategory(CategoryModel model)
     {
         return Ok(await _categoryService.AddCategory(model));
@@ -41,6 +42,7 @@ public class CategoryController : ControllerBase
     [ProducesResponseType(typeof(SuccessResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(NotFoundResponse), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ConflictResponse), StatusCodes.Status409Conflict)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateCategoryById(CategoryModel model, Guid id)
     {
         return Ok(await _categoryService.UpdateCategoryById(model, id));

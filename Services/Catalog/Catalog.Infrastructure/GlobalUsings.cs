@@ -4,3 +4,6 @@ global using Microsoft.Extensions.Caching.Distributed;
 global using Catalog.Application.Common.Response.Contracts;
 global using Catalog.Application.Common.Response.CustomResponses;
 global using Catalog.Application.Common.Response.CustomResponses.Base;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using StackExchange.Redis;

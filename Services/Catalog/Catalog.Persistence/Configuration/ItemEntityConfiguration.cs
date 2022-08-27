@@ -4,7 +4,7 @@ public class ItemEntityConfiguration : IEntityTypeConfiguration<ItemEntity>
 {
     public void Configure(EntityTypeBuilder<ItemEntity> builder)
     {
-        builder.ToTable("Items");
+        builder.ToTable("Item");
 
         builder.Property(x => x.Title)
             .IsRequired()

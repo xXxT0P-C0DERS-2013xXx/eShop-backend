@@ -5,6 +5,7 @@ public class MapperConfiguration : Profile
     public MapperConfiguration()
     {
         CategoryModelMapping();
+        ItemModelMapping();
     }
 
     private void CategoryModelMapping()
@@ -12,5 +13,12 @@ public class MapperConfiguration : Profile
         CreateMap<CategoryModel, CategoryEntity>()
             .ForMember(x => x.Id, opt => opt.Ignore());
         CreateMap<CategoryEntity, CategoryModel>();
+    }
+    
+    private void ItemModelMapping()
+    {
+        CreateMap<ItemModel, ItemEntity>()
+            .ForMember(x => x.Id, opt => opt.Ignore());
+        CreateMap<ItemEntity, ItemModel>();
     }
 }

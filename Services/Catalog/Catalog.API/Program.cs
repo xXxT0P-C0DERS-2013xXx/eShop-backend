@@ -18,7 +18,7 @@ services.AddStackExchangeRedisCache(options =>
     options.InstanceName = "Catalog";
 });
 services.AddFluentValidationAutoValidation();
-services.AddScoped<IValidator<CategoryModel>, CategoryModelValidator>();
+services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(CategoryModelValidator)));
 Injector.InjectServices(services);
 
 var app = builder.Build();

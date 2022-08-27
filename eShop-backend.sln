@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{EE7906D9-EE74-4274-9AB2-F593DC010823}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{BAAF2E36-AC73-45D2-82F7-58E8ED816604}"
+	ProjectSection(SolutionItems) = preProject
+		Services\Catalog\README.md = Services\Catalog\README.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Tests", "Services\Catalog\Catalog.Tests\Catalog.Tests.csproj", "{A0EC1883-807A-404C-B302-D3CA5C5731B2}"
 EndProject
@@ -18,6 +21,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.BusinessLogic", "Services\Catalog\Catalog.BusinessLogic\Catalog.BusinessLogic.csproj", "{3F965B0F-445B-43F8-8D6B-23C4EBB743EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Infrastructure", "Services\Catalog\Catalog.Infrastructure\Catalog.Infrastructure.csproj", "{970D9BB9-3C38-4A0B-B25C-2A72FF378D74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploys", "Deploys", "{EE59D315-B458-40A2-A9C6-050210156684}"
+	ProjectSection(SolutionItems) = preProject
+		Deploys\docker-compose.yml = Deploys\docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

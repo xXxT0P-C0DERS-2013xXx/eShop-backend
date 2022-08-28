@@ -70,7 +70,17 @@ public class ItemService : BaseService, IItemService
         var items = await GetItemsEntity();
         return _responseFactory.SuccessResponse(_mapper.Map<List<ItemEntity>, List<ItemModel>>(items));
     }
-    
+
+    public async Task<BaseResponse> GetItemsWithPagination(ItemFilterModel filterModel, int take = 25, int skip = 0)
+    {
+        var categories = await GetItemsEntity();
+        var filteredCategories = new ItemFiltering(filterModel, categories).GetList();
+
+        var categoriesModel = _mapper.Map<List<ItemEntity>, List<ItemModel>>(filteredCategories);
+
+        return _responseFactory.SuccessResponse(categoriesModel);
+    }
+
     #region Helpers
 
     private async Task<ItemEntity?> GetItemEntityById(Guid id)

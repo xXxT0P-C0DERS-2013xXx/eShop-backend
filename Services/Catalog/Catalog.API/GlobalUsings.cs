@@ -11,6 +11,7 @@ global using Catalog.Application.Configuration;
 global using Catalog.BusinessLogic.Configuration;
 global using Catalog.BusinessLogic.Contracts.Services;
 global using Catalog.BusinessLogic.Models;
+global using Catalog.BusinessLogic.Models.Common;
 global using Catalog.BusinessLogic.Validators;
 global using Catalog.Persistence;
 global using FluentValidation;

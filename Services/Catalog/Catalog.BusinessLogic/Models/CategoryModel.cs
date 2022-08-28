@@ -1,6 +1,5 @@
 ﻿namespace Catalog.BusinessLogic.Models;
 
-[Validator(typeof(CategoryModelValidator))]
 public class CategoryModel
 {
     public Guid Id { get; set; }

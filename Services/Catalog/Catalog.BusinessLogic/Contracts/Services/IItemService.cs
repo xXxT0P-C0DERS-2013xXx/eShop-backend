@@ -7,4 +7,5 @@ public interface IItemService
     Task<BaseResponse> UpdateItemById(ItemModel model, Guid id);
     Task<BaseResponse> DeleteItemById(Guid id);
     Task<BaseResponse> GetAllItems();
+    Task<BaseResponse> GetItemsWithPagination(ItemFilterModel filterModel, int take = 25, int skip = 0);
 }

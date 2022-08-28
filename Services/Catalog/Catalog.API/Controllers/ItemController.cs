@@ -38,6 +38,14 @@ public class ItemController : ControllerBase
         return Ok(await _itemService.GetAllItems());
     }
     
+    [HttpPost]
+    [Route("getItemsWithPagination")]
+    [ProducesResponseType(typeof(SuccessResponse), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetItemsWithPagination(ItemFilterModel model, int take, int skip)
+    {
+        return Ok(await _itemService.GetItemsWithPagination(model, take, skip));
+    }
+    
     [HttpPut]
     [ProducesResponseType(typeof(SuccessResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(NotFoundResponse), StatusCodes.Status404NotFound)]

@@ -12,5 +12,8 @@ public class CatalogEntityConfiguration : IEntityTypeConfiguration<CategoryEntit
 
         builder.Property(x => x.OrderNumber)
             .IsRequired(false);
+
+        builder.HasIndex(x => x.Id);
+        builder.HasIndex(x => x.Title);
     }
 }

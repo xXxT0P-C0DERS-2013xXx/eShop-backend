@@ -22,5 +22,9 @@ public class ItemEntityConfiguration : IEntityTypeConfiguration<ItemEntity>
         builder.HasOne(x => x.Category)
             .WithMany(x => x.Items)
             .HasForeignKey(x => x.CategoryId);
+
+        builder.HasIndex(x => x.Id);
+        builder.HasIndex(x => x.Title);
+        builder.HasIndex(x => x.CategoryId);
     }
 }

@@ -13,3 +13,4 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Options;
 global using Catalog.Application.Common.Response.Contracts;
 global using Catalog.Application.Common.Response;
+global using Catalog.BusinessLogic.Models.Common;

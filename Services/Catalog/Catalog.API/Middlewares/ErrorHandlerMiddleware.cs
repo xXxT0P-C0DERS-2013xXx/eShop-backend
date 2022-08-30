@@ -20,7 +20,7 @@ public class ErrorHandlerMiddleware
             var response = context.Response;
             response.ContentType = "application/json";
             response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            var result = JsonSerializer.Serialize(new { message = error.Message });
+            var result = JsonSerializer.Serialize(new { message = error.Message, stackTrace = error.StackTrace });
             await response.WriteAsync(result);
         }
     }

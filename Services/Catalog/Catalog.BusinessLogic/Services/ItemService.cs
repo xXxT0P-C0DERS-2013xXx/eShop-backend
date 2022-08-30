@@ -74,7 +74,7 @@ public class ItemService : BaseService, IItemService
     public async Task<BaseResponse> GetItemsWithPagination(ItemFilterModel filterModel, int take = 25, int skip = 0)
     {
         var categories = await GetItemsEntity();
-        var filteredCategories = new ItemFiltering(filterModel, categories).GetList();
+        var filteredCategories = new ItemFiltering(filterModel, categories, take, skip).GetList();
 
         var categoriesModel = _mapper.Map<List<ItemEntity>, List<ItemModel>>(filteredCategories);
 

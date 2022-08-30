@@ -154,4 +154,118 @@ public class ItemServiceTests
         Assert.Equal(item?.Quantity, model.Quantity);
         Assert.Single(_context.Items.ToList());
     }
+    
+    [Fact]
+    public async Task GetAllItemsWithPagination_NullFilterOneTakeZeroSkip_True()
+    {
+        // Arrange
+        var itemsList = new List<ItemEntity>()
+        {
+            new()
+            {
+                Title = "faketitle",
+                Price = 110.0M,
+                Description = String.Empty,
+                Quantity = 1
+            },
+            new()
+            {
+                Title = "faketitle2",
+                Price = 60.0M,
+                Description = "String.Empty",
+                Quantity = 170
+            }
+        };
+        await _context.AddRangeAsync(itemsList);
+        await _context.SaveChangesAsync();
+        
+        // Act
+        var response = await _service.GetItemsWithPagination(new ItemFilterModel(), 1, 0);
+
+        // Assert
+        Assert.Equal(itemsList[0].Title, (response.Data as List<ItemModel>)[0].Title);
+        Assert.NotEqual(itemsList.Count, (response.Data as List<ItemModel>).Count);
+    }
+    
+    [Fact]
+    public async Task GetAllItemsWithPagination_NullFilterOneTakeOneSkip_True()
+    {
+        // Arrange
+        var itemsList = new List<ItemEntity>()
+        {
+            new()
+            {
+                Title = "faketitle",
+                Price = 110.0M,
+                Description = String.Empty,
+                Quantity = 1
+            },
+            new()
+            {
+                Title = "faketitle2",
+                Price = 60.0M,
+                Description = "String.Empty",
+                Quantity = 170
+            }
+        };
+        await _context.AddRangeAsync(itemsList);
+        await _context.SaveChangesAsync();
+        
+        // Act
+        var response = await _service.GetItemsWithPagination(new ItemFilterModel(), 1, 1);
+
+        // Assert
+        Assert.Equal(itemsList[1].Title, (response.Data as List<ItemModel>)[0].Title);
+        Assert.NotEqual(itemsList.Count, (response.Data as List<ItemModel>).Count);
+    }
+    
+    [Fact]
+    public async Task GetAllItemsWithPagination_NotNullFilterDefaultTakeDefaultSkip_True()
+    {
+        // Arrange
+        var itemsList = new List<ItemEntity>()
+        {
+            new()
+            {
+                Title = "faketitle",
+                Price = 110.0M,
+                Description = String.Empty,
+                Quantity = 1
+            },
+            new()
+            {
+                Title = "faketitle2",
+                Price = 60.0M,
+                Description = "String.Empty",
+                Quantity = 170
+            },            
+            new()
+            {
+                Title = "faketitle3",
+                Price = 100.0M,
+                Description = "String",
+                Quantity = 10
+            },            
+            new()
+            {
+                Title = "faketitle4",
+                Price = 110.0M,
+                Description = "String",
+                Quantity = 11
+            }
+        };
+        await _context.AddRangeAsync(itemsList);
+        await _context.SaveChangesAsync();
+        
+        // Act
+        var response = await _service.GetItemsWithPagination(new ItemFilterModel()
+        {
+            PriceTo = 115.0M,
+            QuantityTo = 11,
+            QuantityFrom = 10
+        });
+
+        // Assert
+        Assert.Equal(2, (response.Data as List<ItemModel>).Count);
+    }
 }

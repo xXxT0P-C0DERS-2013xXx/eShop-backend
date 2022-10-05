@@ -7,12 +7,10 @@ The main idea is to create an eShop using new technologies, I want to try latest
 
 ## Getting Started
 
-1. Install WSL on your computer. https://docs.microsoft.com/en-us/windows/wsl/install
-2. In WSL install redis-server. https://redis.io/docs/getting-started/installation/install-redis-on-windows/
-3. Install Docker on your computer. https://www.docker.com/
-4. Start Docker
-5. In this point you have two ways: <br>
-  5.1. Lazy way, lol, just start `startInfrastructure.bat` script in root directory, and pray that it works. <br>
+1. Install Docker on your computer. https://www.docker.com/
+2. Start Docker
+3. In this point you have two ways: <br>
+  5.1. Lazy way, lol, just start `startAll.bat` script in root directory, and pray that it works. <br>
   5.2. Hardcore mode for real men, lul, go to the Services and after that go folder by folder and use the instruction in those folders, for example: Service/Catalog... Read README, do step by step... I hope, it will work
 
 

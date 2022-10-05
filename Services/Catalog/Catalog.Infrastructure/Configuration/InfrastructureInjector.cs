@@ -9,7 +9,7 @@ public static class InfrastructureInjector
             options.ConfigurationOptions = new ConfigurationOptions
             {
                 AbortOnConnectFail = false,
-                EndPoints = new EndPointCollection { configuration["ConnectionString:RedisConnection"] ?? string.Empty }
+                EndPoints = new EndPointCollection { configuration.GetConnectionString("RedisConnection") ?? string.Empty }
             };
             options.InstanceName = "Catalog";
         });

@@ -6,7 +6,7 @@ public class CatalogContextFactory : IDesignTimeDbContextFactory<CatalogContext>
     {
         var optionsBuilder = new DbContextOptionsBuilder<CatalogContext>();
         
-        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Catalog;Username=;Password=");
+        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=eShop;Username=postgres;Password=postgres");
 
         return new CatalogContext(optionsBuilder.Options);
     }

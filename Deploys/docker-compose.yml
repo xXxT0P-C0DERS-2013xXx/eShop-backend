@@ -1,5 +1,14 @@
-﻿version: '2.2'
-services:
+﻿services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=eShop
+  
   es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
     container_name: es01
@@ -30,6 +39,21 @@ services:
       ELASTICSEARCH_HOSTS: http://es01:9200
     networks:
       - elastic
+        
+  cache:
+    image: redis:latest
+  
+  catalog:
+    image: ${DOCKER_REGISTRY-}catalog
+    depends_on: 
+      - "cache"
+    build:
+      context: ../
+      dockerfile: ./Deploys/Catalog.Dockerfile
+    ports:
+      - "6001:80"
+    links:
+      - "cache"
 
 volumes:
   data01:

@@ -25,6 +25,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploys", "Deploys", "{EE59D315-B458-40A2-A9C6-050210156684}"
 	ProjectSection(SolutionItems) = preProject
 		Deploys\docker-compose.yml = Deploys\docker-compose.yml
+		Deploys\Catalog.Dockerfile = Deploys\Catalog.Dockerfile
 	EndProjectSection
 EndProject
 Global

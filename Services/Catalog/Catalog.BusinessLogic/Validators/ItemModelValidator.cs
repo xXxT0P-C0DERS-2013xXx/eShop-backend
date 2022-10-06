@@ -1,6 +1,6 @@
 ﻿namespace Catalog.BusinessLogic.Validators;
 
-public class ItemModelValidator : AbstractValidator<ItemModel>
+public class ItemModelValidator : BaseModelValidator<ItemModel>
 {
     private const int MinPrice = 0;
     private const int MinQuantity = 0;

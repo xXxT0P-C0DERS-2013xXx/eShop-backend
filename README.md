@@ -10,8 +10,10 @@ The main idea is to create an eShop using new technologies, I want to try latest
 1. Install Docker on your computer. https://www.docker.com/
 2. Start Docker
 3. In this point you have two ways: <br>
-  5.1. Lazy way, lol, just start `startAll.bat` script in root directory, and pray that it works. <br>
-  5.2. Hardcore mode for real men, lul, go to the Services and after that go folder by folder and use the instruction in those folders, for example: Service/Catalog... Read README, do step by step... I hope, it will work
+  3.1. Lazy way, lol, just start `startAll.bat` script in root directory, and pray that it works. <br>
+  3.2. Hardcore mode for real men, lul, go to the Services and after that go folder by folder and use the instruction in those folders, for example: Service/Catalog... Read README, do step by step... I hope, it will work
+4. Launched on the ports:
+  4.1. Catalog - 6001
 
 
 ~~P.S. Don't try to find me if your computer burns out after following all the steps in this instruction~~

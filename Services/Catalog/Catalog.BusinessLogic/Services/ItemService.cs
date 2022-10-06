@@ -18,6 +18,10 @@ public class ItemService : BaseService, IItemService
     public async Task<BaseResponse> AddItem(ItemModel model)
     {
         var item = _mapper.Map<ItemModel, ItemEntity>(model);
+        var isItemExist = (await GetItemsEntity()).Any(x => x.Title.Equals(model.Title) && x.CategoryId == model.CategoryId);
+        if (isItemExist)
+            return _responseFactory.ConflictResponse(String.Format(ItemValidationConstants.ItemExist, nameof(ItemEntity)), model);
+        
         var result = await SaveAsync(item, CacheConstants.Items);
         if (result <= 0)
             return _responseFactory.ConflictResponse(String.Format(ErrorsConstants.SaveError, nameof(ItemEntity), nameof(AddItem)), model);
@@ -39,6 +43,10 @@ public class ItemService : BaseService, IItemService
         var item = await GetItemEntityById(id);
         if (item == null)
             return _responseFactory.NotFoundResponse(String.Format(ErrorsConstants.NotFoundWithId, nameof(ItemEntity), id));
+        
+        var isItemExist = (await GetItemsEntity()).Any(x => x.Title.Equals(model.Title) && x.CategoryId == model.CategoryId);
+        if (isItemExist)
+            return _responseFactory.ConflictResponse(String.Format(ItemValidationConstants.ItemExist, nameof(ItemEntity)), model);
 
         item.Title = model.Title;
         item.Description = model.Description;

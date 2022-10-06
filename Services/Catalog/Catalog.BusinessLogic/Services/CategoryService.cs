@@ -18,6 +18,10 @@ public class CategoryService : BaseService, ICategoryService
     public async Task<BaseResponse> AddCategory(CategoryModel model)
     {
         var category = _mapper.Map<CategoryModel, CategoryEntity>(model);
+        var isCategoryExist = (await GetCategoriesEntity()).Any(x => x.Title.Equals(model.Title));
+        if (isCategoryExist)
+            return _responseFactory.ConflictResponse(String.Format(CategoryValidationConstants.CategoryExist, nameof(CategoryEntity)), model);
+        
         var result = await SaveAsync(category, CacheConstants.Categories);
         if (result <= 0)
             return _responseFactory.ConflictResponse(String.Format(ErrorsConstants.SaveError, nameof(CategoryEntity), nameof(AddCategory)), model);
@@ -45,6 +49,10 @@ public class CategoryService : BaseService, ICategoryService
         var category = await GetCategoryEntityById(id);
         if (category == null)
             return _responseFactory.NotFoundResponse(String.Format(ErrorsConstants.NotFoundWithId, nameof(CategoryEntity), id));
+        
+        var isItemExist = (await GetCategoriesEntity()).Any(x => x.Title.Equals(model.Title));
+        if (isItemExist)
+            return _responseFactory.ConflictResponse(String.Format(ItemValidationConstants.ItemExist, nameof(ItemEntity)), model);
 
         category.Title = model.Title;
         category.OrderNumber = model.OrderNumber;

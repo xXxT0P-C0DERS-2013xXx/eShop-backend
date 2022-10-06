@@ -1,6 +1,6 @@
 ﻿namespace Catalog.BusinessLogic.Validators;
 
-public class CategoryModelValidator : AbstractValidator<CategoryModel>
+public class CategoryModelValidator : BaseModelValidator<CategoryModel>
 {
     private const int TitleMaxLength = 100;
     public CategoryModelValidator()
